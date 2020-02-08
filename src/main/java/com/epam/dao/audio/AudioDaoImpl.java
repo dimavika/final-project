@@ -109,16 +109,6 @@ public class AudioDaoImpl extends AbstractDao<Audio> implements AudioDao {
                 new AudioArtistInfoDtoRowMapper(), "%" + input + "%");
     }
 
-    @Override
-    public Set<AudioArtistInfoDto> findAudiosJoinArtistBySearch(String input) throws DaoException {
-        List<AudioArtistInfoDto> audiosByTitle = findAudiosJoinArtistByTitle(input);
-        List<AudioArtistInfoDto> audiosByArtist = findAudiosJoinArtistByArtist(input);
-        Set<AudioArtistInfoDto> audios = new HashSet<>();
-        audios.addAll(audiosByTitle);
-        audios.addAll(audiosByArtist);
-        return audios;
-    }
-
 //    private String getDynamicStatementForAudiosByArtist(int artistsSize){
 //        StringBuilder statement = new StringBuilder(FIND_BY_ARTIST);
 //        for (int i = 1; i < artistsSize; i++) {

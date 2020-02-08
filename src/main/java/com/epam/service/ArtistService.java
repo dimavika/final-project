@@ -5,6 +5,7 @@ import com.epam.dao.DaoHelper;
 import com.epam.dao.DaoHelperFactory;
 import com.epam.dao.artist.ArtistDao;
 import com.epam.entity.Artist;
+import com.epam.service.exception.ServiceException;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +23,7 @@ public class ArtistService {
             //daoHelper.startTransaction();
             ArtistDao dao = daoHelper.createArtistDao();
             return dao.findAll();
-        }catch (DaoException | InterruptedException e){
+        }catch (DaoException e){
             throw new ServiceException(e);
         }
     }
@@ -33,7 +34,7 @@ public class ArtistService {
             ArtistDao dao = daoHelper.createArtistDao();
             Artist artist = new Artist(0L, name);
             dao.save(artist);
-        } catch (DaoException | InterruptedException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -43,7 +44,7 @@ public class ArtistService {
             //daoHelper.startTransaction();
             ArtistDao dao = daoHelper.createArtistDao();
             return dao.findById(artistId);
-        } catch (InterruptedException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

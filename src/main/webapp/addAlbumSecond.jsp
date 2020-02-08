@@ -48,7 +48,7 @@
 
         <jsp:useBean id="audios" scope="request" type="java.util.List"/>
         <jsp:useBean id="artistId" scope="request" type="java.lang.Long"/>
-        <form>
+        <form method="post" action="Controller">
             <p>
                 <label>
                     <input name="title" value="" type="text" required>
@@ -71,7 +71,7 @@
             </c:forEach>
             <p>
                 <label>
-                    <input name="artist" value="${artistId}" type="text" hidden readonly>
+                    <input name="artist" value="${artistId}" type="hidden">
                 </label>
             </p>
             <p>

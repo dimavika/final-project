@@ -26,6 +26,4 @@ public interface AudioDao extends Dao<Audio> {
     List<AudioArtistInfoDto> findAudiosJoinArtistByTitle(String input) throws DaoException;
 
     List<AudioArtistInfoDto> findAudiosJoinArtistByArtist(String input) throws DaoException;
-
-    Set<AudioArtistInfoDto> findAudiosJoinArtistBySearch(String input) throws DaoException;
 }

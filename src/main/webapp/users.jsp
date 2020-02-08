@@ -65,7 +65,7 @@
                                 <td>
                                     <form method="post" action="Controller">
                                         <label>
-                                            <input type="text" name="userId" value="${user.id}" hidden readonly>
+                                            <input type="hidden" name="userId" value="${user.id}">
                                         </label>
                                         <c:choose>
                                             <c:when test="${not user.isBlocked}">

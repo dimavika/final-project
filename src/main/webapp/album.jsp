@@ -66,8 +66,11 @@
                             <td>${audio.price}</td>
                             <td>${audio.genre}</td>
                             <td>
-                                <form action="Controller" method="post">
-                                    <button type="submit" value="showReviews" name="command">Reviews</button>
+                                <form action="Controller" method="get">
+                                    <label>
+                                        <input type="hidden" value="${audio.id}" name="audioId">
+                                    </label>
+                                    <button type="submit" value="sendReviews" name="command">Reviews</button>
                                 </form>
                             </td>
                         </tr>

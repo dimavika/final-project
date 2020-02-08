@@ -4,7 +4,7 @@ import com.epam.connection.ConnectionPool;
 
 public class DaoHelperFactory {
 
-    public DaoHelper create() throws InterruptedException {
+    public DaoHelper create() {
         return new DaoHelper(ConnectionPool.getInstance());
     }
 }

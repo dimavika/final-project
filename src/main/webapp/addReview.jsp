@@ -52,10 +52,10 @@
                 <input type="text" name="text" value="" id="text" required>
 
                 <label for="user"></label>
-                <input type="text" name="userId" value="${sessionScope.user.id}" id="user" hidden>
+                <input type="hidden" name="userId" value="${sessionScope.user.id}" id="user">
 
                 <label for="audioId"></label>
-                <input type="text" name="audioId" value="${requestScope.audioId}" id="audioId" hidden>
+                <input type="hidden" name="audioId" value="${requestScope.audioId}" id="audioId">
 
                 <button type="submit" value="addReview" name="command">Add Review</button>
             </form>

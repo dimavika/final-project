@@ -6,6 +6,7 @@ import com.epam.dao.DaoHelperFactory;
 import com.epam.dao.review.ReviewDao;
 import com.epam.dto.ReviewUserInfoDto;
 import com.epam.entity.Review;
+import com.epam.service.exception.ServiceException;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class ReviewService {
             ReviewDao dao = daoHelper.createReviewDao();
             Review review = new Review(0L, userId, text, audioId, dateTime);
             dao.save(review);
-        } catch (DaoException | InterruptedException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -33,7 +34,7 @@ public class ReviewService {
             //daoHelper.startTransaction();
             ReviewDao dao = daoHelper.createReviewDao();
             return dao.findAllJoinUserByAudioId(audioId);
-        } catch (DaoException | InterruptedException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

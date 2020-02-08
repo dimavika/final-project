@@ -6,6 +6,7 @@ import com.epam.dao.DaoHelperFactory;
 import com.epam.dao.album.AlbumDao;
 import com.epam.dto.AlbumArtistInfoDto;
 import com.epam.entity.Album;
+import com.epam.service.exception.ServiceException;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -33,7 +34,7 @@ public class AlbumService {
                 audioService.updateAudioByAlbumId(audioIds, optionalAlbum.get().getId(), daoHelper);
             }
             daoHelper.commit();
-        } catch (DaoException | InterruptedException | SQLException e) {
+        } catch (DaoException | SQLException e) {
 //            daoHelper.rollback();
             throw new ServiceException(e);
         }
@@ -44,7 +45,7 @@ public class AlbumService {
             //daoHelper.startTransaction();
             AlbumDao dao = daoHelper.createAlbumDao();
             return dao.findAllJoinArtist();
-        }catch (DaoException | InterruptedException e){
+        }catch (DaoException e){
             throw new ServiceException(e);
         }
     }

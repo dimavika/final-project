@@ -4,7 +4,7 @@ import com.epam.command.Command;
 import com.epam.command.CommandResult;
 import com.epam.entity.Audio;
 import com.epam.service.AudioService;
-import com.epam.service.ServiceException;
+import com.epam.service.exception.ServiceException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +26,7 @@ public class SendAudiosByArtistCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         long artistId = Long.parseLong(request.getParameter("artist"));
         LOGGER.info(artistId);
-        List<Audio> audios = service.searchAudiosByArtistId(artistId);
+        List<Audio> audios = service.getAudiosByArtistId(artistId);
         request.setAttribute("audios", audios);
         request.setAttribute("artistId", artistId);
         return CommandResult.forward(ADD_ALBUM_SECOND_PAGE);

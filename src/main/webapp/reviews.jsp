@@ -44,12 +44,18 @@
     </div>
 
     <div class="container">
-        <c:if test="${not empty requestScope.reviews}">
-            <c:forEach var="review" items="${requestScope.reviews}">
-                <p>${review.user} ${review.dateTime}</p>
-                <p>${review.text}</p>
-            </c:forEach>
-        </c:if>
+        <c:choose>
+            <c:when test="${not empty requestScope.reviews}">
+                <c:forEach var="review" items="${requestScope.reviews}">
+                    <p>${review.user} ${review.dateTime}</p>
+                    <p>${review.text}</p>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <p>There're no reviews here yet :(</p>
+            </c:otherwise>
+        </c:choose>
+
     </div>
 </div>
 </body>

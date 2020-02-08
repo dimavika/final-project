@@ -13,6 +13,7 @@ import com.epam.command.user.ShowUsersCommand;
 import com.epam.command.user.UnblockUserCommand;
 import com.epam.dao.DaoHelperFactory;
 import com.epam.service.*;
+import com.epam.service.exception.ServiceException;
 
 public class CommandFactory {
 

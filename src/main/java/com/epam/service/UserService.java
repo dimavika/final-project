@@ -3,6 +3,7 @@ package com.epam.service;
 import com.epam.dao.*;
 import com.epam.dao.user.UserDao;
 import com.epam.entity.User;
+import com.epam.service.exception.ServiceException;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +21,7 @@ public class UserService {
             //daoHelper.startTransaction();
             UserDao dao = daoHelper.createUserDao();
             return dao.findUserByLoginAndPassword(login, password);
-        } catch (DaoException | InterruptedException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -30,7 +31,7 @@ public class UserService {
             //daoHelper.startTransaction();
             UserDao dao = daoHelper.createUserDao();
             return dao.findAll();
-        }catch (DaoException | InterruptedException e){
+        }catch (DaoException  e){
             throw new ServiceException(e);
         }
     }
@@ -40,7 +41,7 @@ public class UserService {
             //daoHelper.startTransaction();
             UserDao dao = daoHelper.createUserDao();
             dao.updateIsBlockedByTrue(id);
-        }catch (DaoException | InterruptedException e){
+        }catch (DaoException e){
             throw new ServiceException(e);
         }
     }
@@ -50,7 +51,7 @@ public class UserService {
             //daoHelper.startTransaction();
             UserDao dao = daoHelper.createUserDao();
             dao.updateIsBlockedByFalse(id);
-        }catch (DaoException | InterruptedException e){
+        }catch (DaoException e){
             throw new ServiceException(e);
         }
     }

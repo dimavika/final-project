@@ -47,7 +47,7 @@
 
     <div class="container">
         <c:if test="${sessionScope.user.role eq 'ADMIN'}">
-            <form>
+            <form method="get" action="Controller">
                 <button name="command" value="sendArtistForAddAlbum" type="submit">Add Album</button>
             </form>
         </c:if>
@@ -70,9 +70,9 @@
                             <td>${album.artistName}</td>
                             <td>${album.price}</td>
                             <td>
-                                <form method="post" action="Controller">
+                                <form method="get" action="Controller">
                                     <label>
-                                        <input type="text" name="albumId" value="${album.id}" hidden readonly>
+                                        <input type="hidden" name="albumId" value="${album.id}">
                                     </label>
                                     <button type="submit" value="sendAlbum" name="command">Show</button>
                                 </form>

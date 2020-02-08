@@ -21,7 +21,7 @@
 <div class="main">
     <div class="container">
         <div class="authorize">
-            <form method="post" action="Controller" class="authorize-form">
+            <form method="get" action="Controller" class="authorize-form">
                 <div class="form-group">
                     <label for="login_input">Login</label>
                     <input name="login" value="" id="login_input" type="text" required>
@@ -42,13 +42,16 @@
 
                 <%--    <input type="submit" name="command" value="registration">--%>
             </form>
+
+            <div class="error-message">
+                <c:if test="${not empty requestScope.errorMessage}">
+                    <c:out value="${requestScope.errorMessage}"/>
+                </c:if>
+            </div>
+
         </div>
 
-        <div class="error-message">
-            <c:if test="${not empty sessionScope.errorMessage}">
-                <c:out value="${sessionScope.errorMessage}"/>
-            </c:if>
-        </div>
+
     </div>
 </div>
 </body>

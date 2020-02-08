@@ -47,7 +47,7 @@
 
     <div class="container">
         <div class="search">
-            <form action="Controller" method="post">
+            <form action="Controller" method="get">
                 <div class="search-input">
                     <label for="search-input"></label>
                     <input class="form-control" type="text" name="input" id="search-input"
@@ -63,7 +63,7 @@
 
             <c:if test="${sessionScope.user.role eq 'ADMIN'}">
                 <div class="add-track">
-                    <form method="post" action="Controller">
+                    <form method="get" action="Controller">
                         <button type="submit" value="audio" name="command">Add Audio</button>
                     </form>
                 </div>
@@ -71,7 +71,7 @@
 
             <c:if test="${sessionScope.user.role eq 'ADMIN'}">
                 <div class="add-artist">
-                    <form method="post" action="Controller">
+                    <form method="get" action="Controller">
                         <button type="submit" value="showAddArtist" name="command">Add Artist</button>
                     </form>
                 </div>
@@ -89,6 +89,7 @@
                         <th scope="col">Price</th>
                         <th scope="col">Genre</th>
                         <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -102,13 +103,20 @@
                                 <td>
                                     <form action="Controller" method="post">
                                         <label>
-                                            <input type="text" value="${audio.id}" name="audioId" hidden readonly>
+                                            <input type="hidden" value="${audio.id}" name="audioId">
                                         </label>
                                         <button type="submit" value="deleteAudio" name="command">Delete</button>
+                                    </form>
+                                    <form action="Controller" method="get">
+                                        <label>
+                                            <input type="hidden" value="${audio.id}" name="audioId">
+                                        </label>
                                         <button type="submit" value="sendReviews" name="command">Reviews</button>
                                         <button type="submit" value="sendAudioIdForAddReview" name="command">Add Review</button>
                                     </form>
+
                                 </td>
+                                <td><audio controls src="2Pac ft. Sade - Jezebel .mp3"></audio> </td>
                             </tr>
                     </c:forEach>
 

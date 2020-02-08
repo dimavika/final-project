@@ -47,7 +47,7 @@
     <div class="container">
 
         <jsp:useBean id="artists" scope="request" type="java.util.List"/>
-        <form action="Controller" method="post">
+        <form action="Controller" method="get">
             <p>
                 <label>
                     <select name="artist">

@@ -3,7 +3,7 @@ package com.epam.command.user;
 import com.epam.command.Command;
 import com.epam.command.CommandResult;
 import com.epam.entity.User;
-import com.epam.service.ServiceException;
+import com.epam.service.exception.ServiceException;
 import com.epam.service.UserService;
 import org.apache.log4j.Logger;
 

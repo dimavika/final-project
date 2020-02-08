@@ -3,7 +3,7 @@ package com.epam.command.user;
 import com.epam.command.Command;
 import com.epam.command.CommandResult;
 import com.epam.entity.User;
-import com.epam.service.ServiceException;
+import com.epam.service.exception.ServiceException;
 import com.epam.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,12 +31,12 @@ public class LoginCommand implements Command {
                 session.setAttribute("user", user.get());
                 return CommandResult.redirect(MAIN_PAGE);
             } else {
-                session.setAttribute("errorMessage", "Your account is blocked");
-                return CommandResult.redirect(LOGIN_PAGE);
+                request.setAttribute("errorMessage", "Your account is blocked");
+                return CommandResult.forward(LOGIN_PAGE);
             }
         } else {
-            session.setAttribute("errorMessage", "Incorrect login or password");
-            return CommandResult.redirect(LOGIN_PAGE);
+            request.setAttribute("errorMessage", "Incorrect login or password");
+            return CommandResult.forward(LOGIN_PAGE);
         }
     }
 }

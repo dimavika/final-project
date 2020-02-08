@@ -1,10 +1,12 @@
 package com.epam.connection;
 
+import com.epam.connection.exception.ConnectionException;
 import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.ArrayDeque;
 import java.util.Queue;
+import java.util.ResourceBundle;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -32,7 +34,7 @@ public class ConnectionPool {
                 pool = new ConnectionPool(new ArrayDeque<>(), new ArrayDeque<>());
                 createConnections(pool);
             } catch (SQLException e) {
-                e.printStackTrace(); //TODO thr
+                throw new ConnectionException(e); //TODO thr
             } finally {
                 LOCK.unlock();
             }
@@ -53,13 +55,15 @@ public class ConnectionPool {
         }
     }
 
-    public ProxyConnection getConnection() throws InterruptedException {
+    public ProxyConnection getConnection() {
         ProxyConnection connection;
-        SEMAPHORE.acquire();
-        LOCK.lock();
         try {
+            SEMAPHORE.acquire();
+            LOCK.lock();
             connection = availableConnections.poll();
             connectionsInUse.offer(connection);
+        } catch (InterruptedException e) {
+            throw new ConnectionException(e);
         } finally {
             LOCK.unlock();
         }
@@ -67,9 +71,11 @@ public class ConnectionPool {
     }
 
     private static void createConnections(ConnectionPool pool) throws SQLException {
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
+        int poolSize = Integer.parseInt(resourceBundle.getString("db.poolsize"));
         LOCK.lock();
         try {
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < poolSize; i++) {
                 ProxyConnection connection = ConnectionFactory.create(pool);
                 pool.availableConnections.offer(connection);
             }
