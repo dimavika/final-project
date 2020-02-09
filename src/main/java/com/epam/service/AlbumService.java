@@ -1,6 +1,6 @@
 package com.epam.service;
 
-import com.epam.dao.DaoException;
+import com.epam.dao.exception.DaoException;
 import com.epam.dao.DaoHelper;
 import com.epam.dao.DaoHelperFactory;
 import com.epam.dao.album.AlbumDao;
@@ -22,8 +22,7 @@ public class AlbumService {
     }
 
     public void addAlbum(String title, Long artistId, BigDecimal price, List<Long> audioIds, AudioService audioService)
-            throws ServiceException { //TODO ask about SQLException
-//        DaoHelper daoHelper = null;
+            throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()){
             daoHelper.startTransaction();
             AlbumDao albumDao = daoHelper.createAlbumDao();
@@ -33,16 +32,14 @@ public class AlbumService {
             if (optionalAlbum.isPresent()){
                 audioService.updateAudioByAlbumId(audioIds, optionalAlbum.get().getId(), daoHelper);
             }
-            daoHelper.commit();
-        } catch (DaoException | SQLException e) {
-//            daoHelper.rollback();
+            daoHelper.endTransaction();
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
 
     public List<AlbumArtistInfoDto> getAllJoinArtist() throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            //daoHelper.startTransaction();
             AlbumDao dao = daoHelper.createAlbumDao();
             return dao.findAllJoinArtist();
         }catch (DaoException e){

@@ -5,12 +5,11 @@ import com.epam.command.album.SendAlbumsCommand;
 import com.epam.command.artist.AddArtistCommand;
 import com.epam.command.artist.SendArtistsCommand;
 import com.epam.command.audio.*;
+import com.epam.command.order.AddOrderCommand;
+import com.epam.command.order.SendOrdersCommand;
 import com.epam.command.review.AddReviewCommand;
 import com.epam.command.review.SendReviewsCommand;
-import com.epam.command.user.BlockUserCommand;
-import com.epam.command.user.LoginCommand;
-import com.epam.command.user.ShowUsersCommand;
-import com.epam.command.user.UnblockUserCommand;
+import com.epam.command.user.*;
 import com.epam.dao.DaoHelperFactory;
 import com.epam.service.*;
 import com.epam.service.exception.ServiceException;
@@ -22,6 +21,8 @@ public class CommandFactory {
         switch (command){
             case "login":
                 return new LoginCommand(new UserService(new DaoHelperFactory()));
+            case "logout":
+                return new LogoutCommand();
             case "loginPage":
                 return new ShowPageCommand("login.jsp");
             case "main":
@@ -81,6 +82,16 @@ public class CommandFactory {
                 return new ShowPageCommand("reviews.jsp");
             case "deleteAudio":
                 return new DeleteAudioCommand(new AudioService(new DaoHelperFactory()));
+            case "showAddOrder":
+                return  new ShowPageCommand("addOrder.jsp");
+            case "sendAudioIdAndPriceForAddOrder":
+                return new SendAudioIdAndPriceForOrderAdding();
+            case "addOrder":
+                return new AddOrderCommand(new OrderService(new DaoHelperFactory()));
+            case "sendOrders":
+                return new SendOrdersCommand(new OrderService(new DaoHelperFactory()));
+            case "showOrders":
+                return new ShowPageCommand("orders.jsp");
 //            case "registration":
 //                return new ShowPageCommand("/registration.jsp");
 //            case "register":

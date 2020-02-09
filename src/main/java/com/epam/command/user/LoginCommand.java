@@ -26,6 +26,7 @@ public class LoginCommand implements Command {
         String password = request.getParameter("password");
         Optional<User> user = service.login(login, password);
         HttpSession session = request.getSession();
+        session.setAttribute("locale", "en_US");
         if (user.isPresent()){
             if (!user.get().getIsBlocked()) {
                 session.setAttribute("user", user.get());

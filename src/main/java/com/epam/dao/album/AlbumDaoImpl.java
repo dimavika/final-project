@@ -1,7 +1,7 @@
 package com.epam.dao.album;
 
 import com.epam.dao.AbstractDao;
-import com.epam.dao.DaoException;
+import com.epam.dao.exception.DaoException;
 import com.epam.dto.AlbumArtistInfoDto;
 import com.epam.entity.Album;
 import com.epam.rowMapper.dto.AlbumArtistInfoDtoRowMapper;

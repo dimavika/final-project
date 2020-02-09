@@ -1,7 +1,7 @@
 package com.epam.dao.audio;
 
 import com.epam.dao.AbstractDao;
-import com.epam.dao.DaoException;
+import com.epam.dao.exception.DaoException;
 import com.epam.dto.AudioArtistInfoDto;
 import com.epam.entity.Audio;
 import com.epam.rowMapper.dto.AudioArtistInfoDtoRowMapper;
@@ -9,9 +9,7 @@ import com.epam.rowMapper.AudioRowMapper;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class AudioDaoImpl extends AbstractDao<Audio> implements AudioDao {
 

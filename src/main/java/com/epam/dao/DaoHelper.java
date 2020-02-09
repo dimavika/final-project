@@ -5,9 +5,11 @@ import com.epam.connection.ProxyConnection;
 import com.epam.dao.album.AlbumDaoImpl;
 import com.epam.dao.artist.ArtistDaoImpl;
 import com.epam.dao.audio.AudioDaoImpl;
+import com.epam.dao.exception.DaoException;
+import com.epam.dao.exception.DaoRuntimeException;
+import com.epam.dao.order.OrderDaoImpl;
 import com.epam.dao.review.ReviewDaoImpl;
 import com.epam.dao.user.UserDaoImpl;
-import com.epam.entity.Review;
 
 import java.sql.SQLException;
 
@@ -39,6 +41,10 @@ public class DaoHelper implements AutoCloseable {
         return new ReviewDaoImpl(connection);
     }
 
+    public OrderDaoImpl createOrderDao(){
+        return new OrderDaoImpl(connection);
+    }
+
     @Override
     public void close() {
         connection.returnConnection();
@@ -52,11 +58,18 @@ public class DaoHelper implements AutoCloseable {
         }
     }
 
-    public void commit() throws SQLException {
-        connection.commit();
-    }
-
-    public void rollback() throws SQLException {
-        connection.rollback();
-    }
+    public void endTransaction() throws DaoException {
+        try {
+            try {
+                connection.commit();
+            } catch (SQLException e) {
+                connection.rollback();
+                throw new DaoException(e);
+            } finally {
+                connection.setAutoCommit(true);
+            }
+        } catch (SQLException e) {
+            throw new DaoRuntimeException(e);
+        }
+        }
 }

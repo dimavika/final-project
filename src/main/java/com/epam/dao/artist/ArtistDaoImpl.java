@@ -1,13 +1,12 @@
 package com.epam.dao.artist;
 
 import com.epam.dao.AbstractDao;
-import com.epam.dao.DaoException;
+import com.epam.dao.exception.DaoException;
 import com.epam.entity.Artist;
 import com.epam.rowMapper.ArtistRowMapper;
 
 import java.sql.Connection;
 import java.util.List;
-import java.util.Optional;
 
 public class ArtistDaoImpl extends AbstractDao<Artist> implements ArtistDao {
 

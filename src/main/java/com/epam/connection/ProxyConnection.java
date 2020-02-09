@@ -64,7 +64,7 @@ public class ProxyConnection implements Connection {
         connection.close();
     }
 
-    public void returnConnection(){
+    public void returnConnection() {
         pool.returnConnection(this);
     }
 

@@ -44,7 +44,7 @@ public class CommandSecurityFilter implements Filter {
     }
 
 
-    public Map<String, List<Role>> initializeCommandRoleMap(){
+    private Map<String, List<Role>> initializeCommandRoleMap(){
         List<Role> guest = new ArrayList<>(Arrays.asList(Role.GUEST));
         List<Role> admin = new ArrayList<>(Arrays.asList(Role.ADMIN));
         List<Role> userAndAdmin = new ArrayList<>(Arrays.asList(Role.USER, Role.ADMIN));
@@ -78,6 +78,9 @@ public class CommandSecurityFilter implements Filter {
         map.put("sendReviews", userAndAdmin);
         map.put("showReviews", userAndAdmin);
         map.put("deleteAudio", admin);
+        map.put("showAddOrder", userAndAdmin);
+        map.put("sendAudioIdAndPriceForAddOrder", userAndAdmin);
+        map.put("addOrder", userAndAdmin);
 
         return map;
     }

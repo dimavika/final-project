@@ -35,7 +35,7 @@
                     <a href="<c:url value="/controller?command=sendAlbums"/>">Albums</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/controller?command=showUsers"/>">Orders</a>
+                    <a href="<c:url value="/controller?command=sendOrders"/>">Orders</a>
                 </li>
             </ul>
         </nav>
@@ -84,7 +84,7 @@
                 </div>
             </c:when>
             <c:otherwise>
-                There are no users.
+                <p>There are no users.</p>
             </c:otherwise>
         </c:choose>
     </div>

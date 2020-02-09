@@ -1,7 +1,7 @@
 package com.epam.dao.review;
 
 import com.epam.dao.AbstractDao;
-import com.epam.dao.DaoException;
+import com.epam.dao.exception.DaoException;
 import com.epam.dto.ReviewUserInfoDto;
 import com.epam.entity.Review;
 import com.epam.rowMapper.dto.ReviewUserInfoDtoRowMapper;

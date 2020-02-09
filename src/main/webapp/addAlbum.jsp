@@ -38,7 +38,7 @@
                     <a href="<c:url value="/controller?command=sendAlbums"/>">Albums</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/controller?command=showUsers"/>">Orders</a>
+                    <a href="<c:url value="/controller?command=sendOrders"/>">Orders</a>
                 </li>
             </ul>
         </nav>

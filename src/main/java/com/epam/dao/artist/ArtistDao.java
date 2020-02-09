@@ -1,7 +1,7 @@
 package com.epam.dao.artist;
 
 import com.epam.dao.Dao;
-import com.epam.dao.DaoException;
+import com.epam.dao.exception.DaoException;
 import com.epam.entity.Artist;
 
 import java.util.List;

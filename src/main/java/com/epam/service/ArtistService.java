@@ -1,6 +1,6 @@
 package com.epam.service;
 
-import com.epam.dao.DaoException;
+import com.epam.dao.exception.DaoException;
 import com.epam.dao.DaoHelper;
 import com.epam.dao.DaoHelperFactory;
 import com.epam.dao.artist.ArtistDao;
@@ -20,7 +20,6 @@ public class ArtistService {
 
     public List<Artist> getAll() throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            //daoHelper.startTransaction();
             ArtistDao dao = daoHelper.createArtistDao();
             return dao.findAll();
         }catch (DaoException e){
@@ -30,7 +29,6 @@ public class ArtistService {
 
     public void addArtist(String name) throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            //daoHelper.startTransaction();
             ArtistDao dao = daoHelper.createArtistDao();
             Artist artist = new Artist(0L, name);
             dao.save(artist);
@@ -41,7 +39,6 @@ public class ArtistService {
 
     public Optional<Artist> getById(Long artistId) throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            //daoHelper.startTransaction();
             ArtistDao dao = daoHelper.createArtistDao();
             return dao.findById(artistId);
         } catch (DaoException e) {

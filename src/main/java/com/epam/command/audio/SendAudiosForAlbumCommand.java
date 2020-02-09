@@ -23,7 +23,7 @@ public class SendAudiosForAlbumCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         Long albumId = Long.parseLong(request.getParameter("albumId"));
-        List<AudioArtistInfoDto> audios = service.searchAudiosByAlbumId(albumId);
+        List<AudioArtistInfoDto> audios = service.getAudiosByAlbumId(albumId);
         request.setAttribute("audios", audios);
         return CommandResult.forward(ALBUM_PAGE);
     }

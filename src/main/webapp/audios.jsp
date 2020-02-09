@@ -39,7 +39,7 @@
                     <a href="<c:url value="/controller?command=sendAlbums"/>">Albums</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/controller?command=showUsers"/>">Orders</a>
+                    <a href="<c:url value="/controller?command=sendOrders"/>">Orders</a>
                 </li>
             </ul>
         </nav>
@@ -89,17 +89,21 @@
                         <th scope="col">Price</th>
                         <th scope="col">Genre</th>
                         <th></th>
+                        <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+                            <th></th>
+                        </c:if>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
 
                     <c:forEach var="audio" items="${requestScope.audios}">
-                            <tr>
-                                <td>${audio.title}</td>
-                                <td>${audio.artistName}</td>
-                                <td>${audio.price}</td>
-                                <td>${audio.genre}</td>
+                        <tr>
+                            <td>${audio.title}</td>
+                            <td>${audio.artistName}</td>
+                            <td>${audio.price}</td>
+                            <td>${audio.genre}</td>
+                            <c:if test="${sessionScope.user.role eq 'ADMIN'}">
                                 <td>
                                     <form action="Controller" method="post">
                                         <label>
@@ -107,17 +111,28 @@
                                         </label>
                                         <button type="submit" value="deleteAudio" name="command">Delete</button>
                                     </form>
-                                    <form action="Controller" method="get">
-                                        <label>
-                                            <input type="hidden" value="${audio.id}" name="audioId">
-                                        </label>
-                                        <button type="submit" value="sendReviews" name="command">Reviews</button>
-                                        <button type="submit" value="sendAudioIdForAddReview" name="command">Add Review</button>
-                                    </form>
-
                                 </td>
-                                <td><audio controls src="2Pac ft. Sade - Jezebel .mp3"></audio> </td>
-                            </tr>
+                            </c:if>
+                            <td>
+                                <form action="Controller" method="get">
+                                    <label>
+                                        <input type="hidden" value="${audio.id}" name="audioId">
+                                    </label>
+                                    <label>
+                                        <input type="hidden" value="${audio.price}" name="price">
+                                    </label>
+                                    <button type="submit" value="sendReviews" name="command">Reviews</button>
+                                    <button type="submit" value="sendAudioIdForAddReview" name="command">Add Review
+                                    </button>
+                                    <button type="submit" value="sendAudioIdAndPriceForAddOrder" name="command">Buy
+                                    </button>
+                                </form>
+
+                            </td>
+                            <td>
+                                <audio controls src="2Pac ft. Sade - Jezebel .mp3"></audio>
+                            </td>
+                        </tr>
                     </c:forEach>
 
                     </tbody>

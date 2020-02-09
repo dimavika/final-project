@@ -1,23 +1,22 @@
 <%--
   Created by IntelliJ IDEA.
   User: dimavi_ka
-  Date: 2020-02-01
-  Time: 22:23
+  Date: 2020-02-08
+  Time: 23:59
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Add Review</title>
+    <title>Users</title>
     <link rel="stylesheet" href="stylescss/main1.css">
+    <link rel="stylesheet" href="stylescss/table1.css">
 </head>
 <body>
-
 <header>
     <h1>Spotify</h1>
 </header>
-
 <div class="main">
 
     <div class="navbar-menu">
@@ -45,24 +44,35 @@
     </div>
 
     <div class="container">
-
-        <div class="add-review">
-            <form action="Controller" method="post">
-                <label for="text">Text</label>
-                <input type="text" name="text" value="" id="text" required>
-
-                <label for="user"></label>
-                <input type="hidden" name="userId" value="${sessionScope.user.id}" id="user">
-
-                <label for="audioId"></label>
-                <input type="hidden" name="audioId" value="${requestScope.audioId}" id="audioId">
-
-                <button type="submit" value="addReview" name="command">Add Review</button>
-            </form>
-        </div>
-
+        <c:choose>
+            <c:when test="${not empty requestScope.orders}">
+                <div class="table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th scope="col">AudioTitle</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="order" items="${requestScope.orders}">
+                            <tr>
+                                <td>${order.audioTitle}</td>
+                                <td>${order.price}</td>
+                                <td>${order.dateTime}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <p>There are no orders.</p>
+            </c:otherwise>
+        </c:choose>
     </div>
-
 </div>
 </body>
 </html>
+

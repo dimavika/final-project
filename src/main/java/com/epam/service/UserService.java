@@ -1,6 +1,7 @@
 package com.epam.service;
 
 import com.epam.dao.*;
+import com.epam.dao.exception.DaoException;
 import com.epam.dao.user.UserDao;
 import com.epam.entity.User;
 import com.epam.service.exception.ServiceException;
@@ -18,7 +19,6 @@ public class UserService {
 
     public Optional<User> login(String login, String password) throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            //daoHelper.startTransaction();
             UserDao dao = daoHelper.createUserDao();
             return dao.findUserByLoginAndPassword(login, password);
         } catch (DaoException e) {
@@ -28,7 +28,6 @@ public class UserService {
 
     public List<User> getAll() throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            //daoHelper.startTransaction();
             UserDao dao = daoHelper.createUserDao();
             return dao.findAll();
         }catch (DaoException  e){
@@ -38,7 +37,6 @@ public class UserService {
 
     public void blockUser(Long id) throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            //daoHelper.startTransaction();
             UserDao dao = daoHelper.createUserDao();
             dao.updateIsBlockedByTrue(id);
         }catch (DaoException e){
@@ -48,7 +46,6 @@ public class UserService {
 
     public void unblockUser(Long id) throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            //daoHelper.startTransaction();
             UserDao dao = daoHelper.createUserDao();
             dao.updateIsBlockedByFalse(id);
         }catch (DaoException e){

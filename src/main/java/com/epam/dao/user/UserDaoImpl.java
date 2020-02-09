@@ -1,7 +1,7 @@
 package com.epam.dao.user;
 
 import com.epam.dao.AbstractDao;
-import com.epam.dao.DaoException;
+import com.epam.dao.exception.DaoException;
 import com.epam.entity.User;
 import com.epam.rowMapper.UserRowMapper;
 

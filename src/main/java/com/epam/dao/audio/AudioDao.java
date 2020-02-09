@@ -1,13 +1,11 @@
 package com.epam.dao.audio;
 
 import com.epam.dao.Dao;
-import com.epam.dao.DaoException;
-import com.epam.dao.artist.ArtistDao;
+import com.epam.dao.exception.DaoException;
 import com.epam.dto.AudioArtistInfoDto;
 import com.epam.entity.Audio;
 
 import java.util.List;
-import java.util.Set;
 
 public interface AudioDao extends Dao<Audio> {
 

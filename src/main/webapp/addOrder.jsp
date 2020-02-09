@@ -1,15 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: dimavi_ka
-  Date: 2020-02-01
-  Time: 22:23
+  Date: 2020-02-08
+  Time: 23:21
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Add Review</title>
+    <title>Add Order</title>
     <link rel="stylesheet" href="stylescss/main1.css">
 </head>
 <body>
@@ -45,24 +45,26 @@
     </div>
 
     <div class="container">
-
-        <div class="add-review">
-            <form action="Controller" method="post">
-                <label for="text">Text</label>
-                <input type="text" name="text" value="" id="text" required>
-
-                <label for="user"></label>
-                <input type="hidden" name="userId" value="${sessionScope.user.id}" id="user">
-
-                <label for="audioId"></label>
-                <input type="hidden" name="audioId" value="${requestScope.audioId}" id="audioId">
-
-                <button type="submit" value="addReview" name="command">Add Review</button>
-            </form>
-        </div>
-
+        <form action="Controller" method="post">
+            <p>
+                <label>
+                    <input name="audioId" value="${requestScope.audioId}" type="hidden">
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input name="price" value="${requestScope.price}" type="hidden">
+                </label>
+            </p>
+            <p>
+                <label for="cardNum">Your card number</label>
+                    <input name="cardNum" value="" type="text" id="cardNum" required>
+            </p>
+            <p>
+                <button type="submit" value="addOrder" name="command">Pay</button>
+            </p>
+        </form>
     </div>
-
 </div>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.epam.dao;
 
+import com.epam.dao.exception.DaoException;
 import com.epam.dto.Dto;
 import com.epam.rowMapper.RowMapper;
 import com.epam.entity.Identifiable;

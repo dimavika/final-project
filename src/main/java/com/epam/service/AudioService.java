@@ -1,6 +1,6 @@
 package com.epam.service;
 
-import com.epam.dao.DaoException;
+import com.epam.dao.exception.DaoException;
 import com.epam.dao.DaoHelper;
 import com.epam.dao.DaoHelperFactory;
 import com.epam.dao.audio.AudioDao;
@@ -35,7 +35,6 @@ public class AudioService {
     public void addAudio(String name, Long artistId, BigDecimal price, Genre genre)
             throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            //daoHelper.startTransaction();
             AudioDao dao = daoHelper.createAudioDao();
             Audio audio = new Audio(0L, name, artistId, null, price, genre);
             dao.save(audio);
@@ -66,7 +65,6 @@ public class AudioService {
 
     public List<Audio> getAudiosByArtistId(Long artistId) throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            //daoHelper.startTransaction();
             AudioDao audioDao = daoHelper.createAudioDao();
             return audioDao.findAudiosByArtistId(artistId);
         } catch (DaoException e) {
@@ -87,7 +85,6 @@ public class AudioService {
 
     public Set<AudioArtistInfoDto> getAudiosJoinArtistBySearchInput(String input) throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            //daoHelper.startTransaction();
             AudioDao audioDao = daoHelper.createAudioDao();
             List<AudioArtistInfoDto> audiosByTitle = audioDao.findAudiosJoinArtistByTitle(input);
             List<AudioArtistInfoDto> audiosByArtist = audioDao.findAudiosJoinArtistByArtist(input);
@@ -100,9 +97,8 @@ public class AudioService {
         }
     }
 
-    public List<AudioArtistInfoDto> searchAudiosByAlbumId(Long albumId) throws ServiceException {
+    public List<AudioArtistInfoDto> getAudiosByAlbumId(Long albumId) throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            //daoHelper.startTransaction();
             AudioDao audioDao = daoHelper.createAudioDao();
             return audioDao.findAudiosJoinArtistByAlbumId(albumId);
         } catch (DaoException e) {
@@ -112,7 +108,6 @@ public class AudioService {
 
     public void deleteAudio(Long audioId) throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            //daoHelper.startTransaction();
             AudioDao audioDao = daoHelper.createAudioDao();
             audioDao.removeById(audioId);
         } catch (DaoException e) {
