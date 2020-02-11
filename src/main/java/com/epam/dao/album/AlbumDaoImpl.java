@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class AlbumDaoImpl extends AbstractDao<Album> implements AlbumDao {
 
-    private static final String ADD_ALBUM = "INSERT albums (title, artist_id, price) VALUES (?,?,?)";
+    private static final String ADD_ALBUM = "INSERT albums (title, artist_id) VALUES (?,?)";
     private static final String FIND_ALBUM_BY_TITLE = "SELECT * FROM albums WHERE title = ?";
     private static final String FIND_ALL_JOIN_ARTIST = "SELECT * FROM Albums " +
             "inner join Artist on Albums.artist_id = Artist.id";
@@ -29,7 +29,7 @@ public class AlbumDaoImpl extends AbstractDao<Album> implements AlbumDao {
 
     @Override
     public void save(Album item) throws DaoException {
-        executeUpdate(ADD_ALBUM, item.getTitle(), item.getArtistId(), item.getPrice());
+        executeUpdate(ADD_ALBUM, item.getTitle(), item.getArtistId());
     }
 
     @Override

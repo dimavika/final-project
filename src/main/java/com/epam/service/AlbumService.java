@@ -21,18 +21,23 @@ public class AlbumService {
         this.daoHelperFactory = daoHelperFactory;
     }
 
-    public void addAlbum(String title, Long artistId, BigDecimal price, List<Long> audioIds, AudioService audioService)
+    public void addAlbum(String title, Long artistId, List<Long> audioIds, AudioService audioService)
             throws ServiceException {
-        try (DaoHelper daoHelper = daoHelperFactory.create()){
-            daoHelper.startTransaction();
-            AlbumDao albumDao = daoHelper.createAlbumDao();
-            Album album = new Album(0L, title, artistId, price);
-            albumDao.save(album);
-            Optional<Album> optionalAlbum = albumDao.findAlbumByTitle(title);
-            if (optionalAlbum.isPresent()){
-                audioService.updateAudioByAlbumId(audioIds, optionalAlbum.get().getId(), daoHelper);
+        try (DaoHelper daoHelper = daoHelperFactory.create()) {
+            try {
+                daoHelper.startTransaction();
+                AlbumDao albumDao = daoHelper.createAlbumDao();
+                Album album = new Album(0L, title, artistId);
+                albumDao.save(album);
+                Optional<Album> optionalAlbum = albumDao.findAlbumByTitle(title);
+                if (optionalAlbum.isPresent()) {
+                    audioService.updateAudioByAlbumId(audioIds, optionalAlbum.get().getId(), daoHelper);
+                }
+            } catch (DaoException e) {
+                daoHelper.rollback();
+                throw e;
             }
-            daoHelper.endTransaction();
+            daoHelper.commit();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -42,7 +47,7 @@ public class AlbumService {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
             AlbumDao dao = daoHelper.createAlbumDao();
             return dao.findAllJoinArtist();
-        }catch (DaoException e){
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

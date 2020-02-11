@@ -3,6 +3,7 @@ package com.epam.controller;
 import com.epam.command.Command;
 import com.epam.command.CommandFactory;
 import com.epam.command.CommandResult;
+import com.epam.connection.ConnectionPool;
 import com.epam.service.exception.ServiceException;
 
 import javax.servlet.RequestDispatcher;
@@ -19,6 +20,8 @@ public class Controller extends HttpServlet {
     private static final Logger LOGGER = Logger.getLogger(Controller.class);
 
     public void destroy() {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        pool.shutdown();
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException,

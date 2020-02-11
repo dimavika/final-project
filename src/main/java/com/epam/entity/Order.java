@@ -1,8 +1,9 @@
 package com.epam.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Order implements Identifiable {
+public class Order implements Serializable, Identifiable {
 
     private Long id;
     private Long audioId;

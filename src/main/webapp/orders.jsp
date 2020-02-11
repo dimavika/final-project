@@ -7,9 +7,12 @@
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.locale}" scope="session"/>
+<fmt:setBundle basename="pagecontent"/>
 <html>
 <head>
-    <title>Users</title>
+    <title><fmt:message key="title.orders"/></title>
     <link rel="stylesheet" href="stylescss/main1.css">
     <link rel="stylesheet" href="stylescss/table1.css">
 </head>
@@ -23,21 +26,29 @@
         <nav>
             <ul>
                 <li>
-                    <a href="<c:url value="/controller?command=main"/>">Home</a>
+                    <a href="<c:url value="/controller?command=main"/>"><fmt:message key="li.main"/></a>
                 </li>
+
                 <c:if test="${sessionScope.user.role eq 'ADMIN'}">
                     <li>
-                        <a href="<c:url value="/controller?command=showUsers"/>">Users</a>
+                        <a href="<c:url value="/controller?command=showUsers"/>"><fmt:message key="li.users"/></a>
                     </li>
                 </c:if>
+
                 <li>
-                    <a href="<c:url value="/controller?command=audios"/>">Audios</a>
+                    <a href="<c:url value="/controller?command=audios"/>"><fmt:message key="li.audios"/></a>
                 </li>
+
                 <li>
-                    <a href="<c:url value="/controller?command=sendAlbums"/>">Albums</a>
+                    <a href="<c:url value="/controller?command=sendAlbums"/>"><fmt:message key="li.albums"/></a>
                 </li>
+
                 <li>
-                    <a href="<c:url value="/controller?command=sendOrders"/>">Orders</a>
+                    <a href="<c:url value="/controller?command=sendOrders"/>"><fmt:message key="li.orders"/></a>
+                </li>
+
+                <li>
+                    <a href="<c:url value="/controller?command=logout"/>"><fmt:message key="li.logout"/></a>
                 </li>
             </ul>
         </nav>
@@ -50,9 +61,10 @@
                     <table>
                         <thead>
                         <tr>
-                            <th scope="col">AudioTitle</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Date</th>
+                            <th scope="col"><fmt:message key="th.audioTitle"/></th>
+                            <th scope="col"><fmt:message key="th.price"/></th>
+                            <th scope="col"><fmt:message key="th.date"/></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -61,6 +73,9 @@
                                 <td>${order.audioTitle}</td>
                                 <td>${order.price}</td>
                                 <td>${order.dateTime}</td>
+                                <td>
+                                    <audio controls src="2Pac ft. Sade - Jezebel .mp3"></audio>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -68,7 +83,7 @@
                 </div>
             </c:when>
             <c:otherwise>
-                <p>There are no orders.</p>
+                <p><fmt:message key="p.noOrders"/></p>
             </c:otherwise>
         </c:choose>
     </div>

@@ -1,6 +1,8 @@
 package com.epam.entity;
 
-public class Review implements Identifiable {
+import java.io.Serializable;
+
+public class Review implements Serializable, Identifiable {
 
     private final Long id;
     private final Long userId;

@@ -30,14 +30,13 @@ public class AddAlbumCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         boolean isSingleArtist = true; //TODO проверка на сингл артиста
         String title = request.getParameter("title");
-        BigDecimal price = BigDecimal.valueOf(Double.valueOf(request.getParameter("price")));
         String[] values = request.getParameterValues("albumAudios");
         List<Long> audioIds = new ArrayList<>();
         for (String value : values) {
             audioIds.add(Long.valueOf(value));
         }
         long artistId = Long.valueOf(request.getParameter("artist"));
-        albumService.addAlbum(title, artistId, price, audioIds, audioService);
+        albumService.addAlbum(title, artistId, audioIds, audioService);
         return CommandResult.redirect(ALBUMS_PAGE);
     }
 }

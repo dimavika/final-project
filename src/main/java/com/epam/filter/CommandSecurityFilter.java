@@ -50,6 +50,7 @@ public class CommandSecurityFilter implements Filter {
         List<Role> userAndAdmin = new ArrayList<>(Arrays.asList(Role.USER, Role.ADMIN));
         Map<String, List<Role>> map = new HashMap<>();
         map.put("login", guest);
+        map.put("logout", userAndAdmin);
         map.put("loginPage", guest);
         map.put("main", userAndAdmin);
         map.put("showUsers", admin);

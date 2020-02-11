@@ -13,7 +13,6 @@ public class AlbumRowMapper implements RowMapper<Album> {
         Long id = resultSet.getLong(Album.ID);
         String title = resultSet.getString(Album.TITLE);
         Long artistId = resultSet.getLong(Album.ARTIST_ID);
-        BigDecimal price = resultSet.getBigDecimal(Album.PRICE);
-        return new Album(id, title, artistId, price);
+        return new Album(id, title, artistId);
     }
 }

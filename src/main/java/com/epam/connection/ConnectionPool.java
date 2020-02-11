@@ -27,7 +27,7 @@ public class ConnectionPool {
         this.connectionsInUse = connectionsInUse;
     }
 
-    public static ConnectionPool getInstance(){
+    public static ConnectionPool getInstance() {
         if (pool == null) {
             LOCK.tryLock();
             try {
@@ -42,10 +42,10 @@ public class ConnectionPool {
         return pool;
     }
 
-    public void returnConnection(ProxyConnection proxyConnection){
+    public void returnConnection(ProxyConnection proxyConnection) {
         LOCK.lock();
         try {
-            if (connectionsInUse.contains(proxyConnection)){
+            if (connectionsInUse.contains(proxyConnection)) {
                 connectionsInUse.remove(proxyConnection);
                 availableConnections.offer(proxyConnection);
                 SEMAPHORE.release();
@@ -84,9 +84,17 @@ public class ConnectionPool {
         }
     }
 
-    public void shutdown() throws SQLException {
-        for (ProxyConnection connection: availableConnections) {
-            connection.close();
+    public void shutdown() {
+        try {
+            for (ProxyConnection connection : availableConnections) {
+                connection.close();
+            }
+            for (ProxyConnection connection : connectionsInUse) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new ConnectionException(e);
         }
     }
 }

@@ -10,6 +10,7 @@ import com.epam.dao.exception.DaoRuntimeException;
 import com.epam.dao.order.OrderDaoImpl;
 import com.epam.dao.review.ReviewDaoImpl;
 import com.epam.dao.user.UserDaoImpl;
+import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
 
@@ -17,31 +18,33 @@ public class DaoHelper implements AutoCloseable {
 
     private ProxyConnection connection;
 
+    private static final Logger LOGGER = Logger.getLogger(DaoHelper.class);
+
     public DaoHelper(ConnectionPool connectionPool) {
         this.connection = connectionPool.getConnection();
     }
 
-    public UserDaoImpl createUserDao(){
+    public UserDaoImpl createUserDao() {
         return new UserDaoImpl(connection);
     }
 
-    public AudioDaoImpl createAudioDao(){
+    public AudioDaoImpl createAudioDao() {
         return new AudioDaoImpl(connection);
     }
 
-    public ArtistDaoImpl createArtistDao(){
+    public ArtistDaoImpl createArtistDao() {
         return new ArtistDaoImpl(connection);
     }
 
-    public AlbumDaoImpl createAlbumDao(){
+    public AlbumDaoImpl createAlbumDao() {
         return new AlbumDaoImpl(connection);
     }
 
-    public ReviewDaoImpl createReviewDao(){
+    public ReviewDaoImpl createReviewDao() {
         return new ReviewDaoImpl(connection);
     }
 
-    public OrderDaoImpl createOrderDao(){
+    public OrderDaoImpl createOrderDao() {
         return new OrderDaoImpl(connection);
     }
 
@@ -58,7 +61,7 @@ public class DaoHelper implements AutoCloseable {
         }
     }
 
-    public void endTransaction() throws DaoException {
+    public void commit() throws DaoException {
         try {
             try {
                 connection.commit();
@@ -69,7 +72,17 @@ public class DaoHelper implements AutoCloseable {
                 connection.setAutoCommit(true);
             }
         } catch (SQLException e) {
+            LOGGER.error(e);
             throw new DaoRuntimeException(e);
         }
+    }
+
+    public void rollback() throws DaoException {
+        try {
+            connection.rollback();
+            connection.setAutoCommit(true);
+        } catch (SQLException e) {
+            throw new DaoException(e);
         }
+    }
 }

@@ -15,7 +15,6 @@ public class AlbumArtistInfoDtoRowMapper implements RowMapper<AlbumArtistInfoDto
         Long id = resultSet.getLong(Album.ID);
         String title = resultSet.getString(Album.TITLE);
         String artistName = resultSet.getString(AlbumArtistInfoDto.ARTIST_NAME);
-        BigDecimal price = resultSet.getBigDecimal(Album.PRICE);
-        return new AlbumArtistInfoDto(id, title, artistName, price);
+        return new AlbumArtistInfoDto(id, title, artistName);
     }
 }
