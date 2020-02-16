@@ -88,6 +88,8 @@ public class CommandSecurityFilter implements Filter {
         map.put("addAudioInAlbum", admin);
         map.put("deleteAlbumAudio", admin);
         map.put("changeAlbumTitle", admin);
+        map.put("sendArtistForUpdateAudio", admin);
+        map.put("updateAudio", admin);
 
         return map;
     }

@@ -4,7 +4,9 @@ import com.epam.spotify.dao.Dao;
 import com.epam.spotify.dao.exception.DaoException;
 import com.epam.spotify.dto.AudioArtistInfoDto;
 import com.epam.spotify.entity.Audio;
+import com.epam.spotify.entity.enums.Genre;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface AudioDao extends Dao<Audio> {
@@ -28,4 +30,6 @@ public interface AudioDao extends Dao<Audio> {
     List<AudioArtistInfoDto> findAudiosJoinArtistByArtistWithNoAlbum(Long artistId) throws DaoException;
 
     void removeAlbumAudioById(Long audioId) throws DaoException;
+
+    void updateAudio(String title, Long artistId, BigDecimal price, Genre genre, Long audioId) throws DaoException;
 }

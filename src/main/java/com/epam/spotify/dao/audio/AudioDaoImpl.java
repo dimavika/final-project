@@ -4,10 +4,12 @@ import com.epam.spotify.dao.AbstractDao;
 import com.epam.spotify.dao.exception.DaoException;
 import com.epam.spotify.dto.AudioArtistInfoDto;
 import com.epam.spotify.entity.Audio;
+import com.epam.spotify.entity.enums.Genre;
 import com.epam.spotify.rowMapper.dto.AudioArtistInfoDtoRowMapper;
 import com.epam.spotify.rowMapper.AudioRowMapper;
 import org.apache.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.util.List;
 
@@ -39,6 +41,9 @@ public class AudioDaoImpl extends AbstractDao<Audio> implements AudioDao {
             " WHERE Audios.artist_id = ? AND Album_audio.album_id is NULL";
 
     private static final String DELETE_ALBUM_AUDIO_BY_ID = "DELETE FROM album_audio WHERE audio_id = ?";
+
+    private static final String UPDATE_AUDIO = "UPDATE audios SET title = ?, artist_id = ?, price = ?, genre = ? " +
+            "WHERE id = ?";
 
     public AudioDaoImpl(Connection connection) {
         super(connection);
@@ -124,6 +129,12 @@ public class AudioDaoImpl extends AbstractDao<Audio> implements AudioDao {
     @Override
     public void removeAlbumAudioById(Long audioId) throws DaoException {
         executeUpdate(DELETE_ALBUM_AUDIO_BY_ID, audioId);
+    }
+
+    @Override
+    public void updateAudio(String title, Long artistId, BigDecimal price, Genre genre, Long audioId)
+            throws DaoException {
+        executeUpdate(UPDATE_AUDIO, title, artistId, price, genre.toString(), audioId);
     }
 
 //    private String getDynamicStatementForAudiosByArtist(int artistsSize){

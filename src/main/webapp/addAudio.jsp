@@ -12,8 +12,17 @@
 <fmt:setBundle basename="pagecontent"/>
 <html>
 <head>
-    <title><fmt:message key="title.addAudio"/></title>
-    <link rel="stylesheet" href="WEB-INF/stylescss/main1.css">
+    <title>
+        <c:choose>
+            <c:when test="${empty requestScope.audioId}">
+                <fmt:message key="title.addAudio"/>
+            </c:when>
+            <c:otherwise>
+                <fmt:message key="title.updateAudio"/>
+            </c:otherwise>
+        </c:choose>
+    </title>
+    <link rel="stylesheet" href="stylescss/main1.css">
 </head>
 <body>
 
@@ -71,11 +80,11 @@
         <form action="Controller" method="post">
             <p>
                 <label for="artist"><fmt:message key="label.artist"/></label>
-                    <select name="artist" id="artist">
-                        <c:forEach var="artist" items="${artists}">
-                            <option value="${artist.id}">${artist.name}</option>
-                        </c:forEach>
-                    </select>
+                <select name="artist" id="artist">
+                    <c:forEach var="artist" items="${artists}">
+                        <option value="${artist.id}">${artist.name}</option>
+                    </c:forEach>
+                </select>
             </p>
             <p>
                 <label for="title"><fmt:message key="label.title"/></label>
@@ -89,16 +98,30 @@
             </p>
             <p>
                 <label for="genre"><fmt:message key="label.genre"/></label>
-                    <select name="genre" id="genre">
-                        <option value="rap"><fmt:message key="option.rap"/></option>
-                        <option value="rock"><fmt:message key="option.rock"/></option>
-                        <option value="country"><fmt:message key="option.country"/></option>
-                        <option value="classic"><fmt:message key="option.classic"/></option>
-                    </select>
+                <select name="genre" id="genre">
+                    <option value="rap"><fmt:message key="option.rap"/></option>
+                    <option value="rock"><fmt:message key="option.rock"/></option>
+                    <option value="country"><fmt:message key="option.country"/></option>
+                    <option value="classic"><fmt:message key="option.classic"/></option>
+                </select>
             </p>
-            <p>
-                <button type="submit" value="addAudio" name="command"><fmt:message key="button.addAudio"/></button>
-            </p>
+            <c:choose>
+                <c:when test="${empty requestScope.audioId}">
+                    <p>
+                        <button type="submit" value="addAudio" name="command"><fmt:message
+                                key="button.addAudio"/></button>
+                    </p>
+                </c:when>
+                <c:otherwise>
+                    <label>
+                        <input type="hidden" value="${requestScope.audioId}" name="audioId">
+                    </label>
+                    <p>
+                        <button type="submit" value="updateAudio" name="command"><fmt:message
+                                key="button.updateAudio"/></button>
+                    </p>
+                </c:otherwise>
+            </c:choose>
         </form>
 
     </div>

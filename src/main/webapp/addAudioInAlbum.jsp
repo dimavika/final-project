@@ -72,18 +72,25 @@
                 <input type="hidden" value="${requestScope.albumId}" name="albumId">
             </label>
 
-            <c:forEach var="audio" items="${requestScope.audios}">
-                <p>
-                    <label for="title">${audio.title}</label>
-                    <input name="albumAudios" value="${audio.id}" id="title" type="checkbox">
-                </p>
-            </c:forEach>
+            <c:choose>
+                <c:when test="${not empty requestScope.audios}">
+                    <c:forEach var="audio" items="${requestScope.audios}">
+                        <p>
+                            <label for="title">${audio.title}</label>
+                            <input name="albumAudios" value="${audio.id}" id="title" type="checkbox">
+                        </p>
+                    </c:forEach>
 
-            <p>
-                <button type="submit" value="addAudioInAlbum" name="command">
-                    <fmt:message key="button.addAudio"/>
-                </button>
-            </p>
+                    <p>
+                        <button type="submit" value="addAudioInAlbum" name="command">
+                            <fmt:message key="button.addAudio"/>
+                        </button>
+                    </p>
+                </c:when>
+                <c:otherwise>
+                    <p><fmt:message key="p.noAudiosByArtist"/></p>
+                </c:otherwise>
+            </c:choose>
         </form>
 
     </div>

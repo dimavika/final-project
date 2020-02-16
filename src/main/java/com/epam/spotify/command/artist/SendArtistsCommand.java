@@ -25,6 +25,10 @@ public class SendArtistsCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         List<Artist> artists = service.getAll();
+        String audioIdStr = request.getParameter("audioId");
+        if (audioIdStr != null) {
+            request.setAttribute("audioId", Long.parseLong(audioIdStr));
+        }
         request.setAttribute("artists", artists);
         return CommandResult.forward(ADD_AUDIO_PAGE + page);
     }

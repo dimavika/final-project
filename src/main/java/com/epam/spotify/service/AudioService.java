@@ -122,4 +122,14 @@ public class AudioService {
             throw new ServiceException(e);
         }
     }
+
+    public void updateAudio(String name, Long artistId, BigDecimal price, Genre genre, Long audioId)
+            throws ServiceException {
+        try (DaoHelper daoHelper = daoHelperFactory.create()) {
+            AudioDao dao = daoHelper.createAudioDao();
+            dao.updateAudio(name, artistId, price, genre, audioId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

@@ -105,6 +105,10 @@ public class CommandFactory {
                 return new DeleteAlbumAudioCommand(new AlbumService(new DaoHelperFactory()));
             case "changeAlbumTitle":
                 return new ChangeAlbumTitleCommand(new AlbumService(new DaoHelperFactory()));
+            case "sendArtistForUpdateAudio":
+                return new SendArtistsCommand(new ArtistService(new DaoHelperFactory()), "showChangeAudio");
+            case "updateAudio":
+                return new UpdateAudioCommand(new AudioService(new DaoHelperFactory()));
 //            case "registration":
 //                return new ShowPageCommand("/registration.jsp");
 //            case "register":

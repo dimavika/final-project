@@ -25,11 +25,9 @@ public class AddAudioInAlbumCommand implements Command {
         Long albumId = Long.valueOf(request.getParameter("albumId"));
         String[] values = request.getParameterValues("albumAudios");
         List<Long> audioIds = new ArrayList<>();
-        if (values != null) {
-            for (String value : values) {
-                audioIds.add(Long.valueOf(value));
-            }
-        } //TODO thr error
+        for (String value : values) {
+            audioIds.add(Long.valueOf(value));
+        }
         service.addAudioInAlbum(albumId, audioIds);
         return CommandResult.redirect(ALBUMS_PAGE);
     }

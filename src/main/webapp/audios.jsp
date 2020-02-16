@@ -137,6 +137,11 @@
                                             <fmt:message key="button.delete"/>
                                         </button>
                                     </form>
+                                    <form action="Controller" method="get">
+                                        <button type="submit" value="audio" name="command">
+                                            <fmt:message key="button.updateAudio"/>
+                                        </button>
+                                    </form>
                                 </td>
                             </c:if>
                             <td>
