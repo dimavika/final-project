@@ -19,6 +19,16 @@
 <body>
 
 <header>
+    <div class="locale">
+        <form action="Controller" method="get">
+            <input type="hidden" name="locale" value="en_US">
+            <button type="submit" name="command" value="changeLocale">EN</button>
+        </form>
+        <form action="Controller" method="get">
+            <input type="hidden" name="locale" value="ru_RU">
+            <button type="submit" name="command" value="changeLocale">RU</button>
+        </form>
+    </div>
     <h1>Spotify</h1>
 </header>
 
@@ -57,6 +67,31 @@
     </div>
 
     <div class="container">
+
+        <div class="buttons">
+
+            <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+                <div class="add-audio">
+                    <form method="get" action="Controller">
+
+                        <label>
+                            <input type="hidden" value="${requestScope.albumId}" name="albumId">
+                        </label>
+
+                        <label>
+                            <input type="hidden" value="${requestScope.artist}" name="artist">
+                        </label>
+
+                        <button type="submit" value="sendAudiosForChangeAlbum" name="command">
+                            <fmt:message key="button.addAudio"/>
+                        </button>
+
+                    </form>
+                </div>
+            </c:if>
+
+        </div>
+
         <c:if test="${not empty requestScope.audios}">
             <div class="tracks">
                 <table>
@@ -67,6 +102,9 @@
                         <th scope="col"><fmt:message key="th.price"/></th>
                         <th scope="col"><fmt:message key="th.genre"/></th>
                         <th></th>
+                        <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+                            <th></th>
+                        </c:if>
                     </tr>
                     </thead>
                     <tbody>
@@ -87,6 +125,28 @@
                                     </button>
                                 </form>
                             </td>
+                            <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+                                <td>
+                                    <form method="post" action="Controller">
+                                        <label>
+                                            <input type="hidden" value="${requestScope.albumId}" name="albumId">
+                                        </label>
+
+                                        <label>
+                                            <input type="hidden" value="${audio.id}" name="audioId">
+                                        </label>
+
+                                        <label>
+                                            <input type="hidden" value="${requestScope.artist}" name="artist">
+                                        </label>
+
+                                        <button type="submit" name="command" value="deleteAlbumAudio">
+                                            <fmt:message key="button.delete"/>
+                                        </button>
+                                    </form>
+                                </td>
+                            </c:if>
+
                         </tr>
                     </c:forEach>
 

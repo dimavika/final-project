@@ -5,7 +5,7 @@
          version="4.0">
     <servlet>
         <servlet-name>Controller</servlet-name>
-        <servlet-class>com.epam.controller.Controller</servlet-class>
+        <servlet-class>com.epam.spotify.controller.Controller</servlet-class>
     </servlet>
 
     <welcome-file-list>

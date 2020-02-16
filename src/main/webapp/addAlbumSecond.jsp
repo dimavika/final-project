@@ -18,6 +18,16 @@
 <body>
 
 <header>
+    <div class="locale">
+        <form action="Controller" method="get">
+            <input type="hidden" name="locale" value="en_US">
+            <button type="submit" name="command" value="changeLocale">EN</button>
+        </form>
+        <form action="Controller" method="get">
+            <input type="hidden" name="locale" value="ru_RU">
+            <button type="submit" name="command" value="changeLocale">RU</button>
+        </form>
+    </div>
     <h1>Spotify</h1>
 </header>
 
@@ -64,25 +74,20 @@
                 <label for="albumTitle"><fmt:message key="label.title"/></label>
                     <input name="title" value="" id="albumTitle" type="text" required>
             </p>
-            <p>
-                <label for="price"><fmt:message key="label.price"/></label>
-                    <input type="number" name="price" id="price"
-                           pattern="[0-9]+([\.,][0-9]+)?" step="0.01"
-                           title="This should be a number with up to 2 decimal places." required>
-            </p>
+
             <c:forEach var="audio" items="${audios}">
-                <c:if test="${audio.albumId eq 0}">
                     <p>
                         <label for="title">${audio.title}</label>
                         <input name="albumAudios" value="${audio.id}" id="title" type="checkbox">
                     </p>
-                </c:if>
             </c:forEach>
+
             <p>
                 <label>
                     <input name="artist" value="${artistId}" type="hidden">
                 </label>
             </p>
+
             <p>
                 <button type="submit" value="addAlbum" name="command"><fmt:message key="button.addAlbum"/></button>
             </p>

@@ -132,6 +132,30 @@ nav ul li a {
     float: right;
 }
 
+.reviews div p {
+    padding:5px;
+    margin:0 auto 0 auto;
+    width:50%;
+    border: 4px double black;
+}
+
+.reviews{
+    width:50%;
+    margin: 0 auto 0 auto;
+}
+
+.container p {
+    width:50%;
+    margin: 0 auto 0 auto;
+}
+.container div p {
+    width:50%;
+    margin: 0 auto 0 auto;
+}
+.locale form {
+    display: inline-block;
+    float: right;
+}
 /*nav ul ul {*/
 /*    display: none;*/
 /*    background: #fff;*/

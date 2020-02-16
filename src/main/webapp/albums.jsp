@@ -19,6 +19,16 @@
 <body>
 
 <header>
+    <div class="locale">
+        <form action="Controller" method="get">
+            <input type="hidden" name="locale" value="en_US">
+            <button type="submit" name="command" value="changeLocale">EN</button>
+        </form>
+        <form action="Controller" method="get">
+            <input type="hidden" name="locale" value="ru_RU">
+            <button type="submit" name="command" value="changeLocale">RU</button>
+        </form>
+    </div>
     <h1>Spotify</h1>
 </header>
 
@@ -80,6 +90,10 @@
                         <th scope="col"><fmt:message key="th.title"/></th>
                         <th scope="col"><fmt:message key="th.artist"/></th>
                         <th></th>
+                        <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+                            <th></th>
+                            <th></th>
+                        </c:if>
                     </tr>
                     </thead>
                     <tbody>
@@ -92,11 +106,42 @@
                                     <label>
                                         <input type="hidden" name="albumId" value="${album.id}">
                                     </label>
+
+                                    <label>
+                                        <input type="hidden" name="artist" value="${album.artistId}">
+                                    </label>
+
                                     <button type="submit" value="sendAlbum" name="command">
                                         <fmt:message key="button.show"/>
                                     </button>
                                 </form>
                             </td>
+                            <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+                                <td>
+                                    <form method="post" action="Controller">
+                                        <label>
+                                            <input type="hidden" name="albumId" value="${album.id}">
+                                        </label>
+                                        <button type="submit" value="deleteAlbum" name="command">
+                                            <fmt:message key="button.delete"/>
+                                        </button>
+                                    </form>
+                                </td>
+
+                                <td>
+                                    <form class="change-title" method="post" action="Controller">
+                                        <label>
+                                            <input type="hidden" name="albumId" value="${album.id}">
+                                        </label>
+                                        <label>
+                                            <input type="text" name="title" value="${album.title}" required>
+                                        </label>
+                                        <button type="submit" value="changeAlbumTitle" name="command">
+                                            <fmt:message key="button.changeAlbumTitle"/>
+                                        </button>
+                                    </form>
+                                </td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                     </tbody>

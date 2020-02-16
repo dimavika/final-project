@@ -18,6 +18,16 @@
 </head>
 <body>
 <header>
+    <div class="locale">
+        <form action="Controller" method="get">
+            <input type="hidden" name="locale" value="en_US">
+            <button type="submit" name="command" value="changeLocale">EN</button>
+        </form>
+        <form action="Controller" method="get">
+            <input type="hidden" name="locale" value="ru_RU">
+            <button type="submit" name="command" value="changeLocale">RU</button>
+        </form>
+    </div>
     <h1>Spotify</h1>
 </header>
 <div class="main">
@@ -64,7 +74,7 @@
                             <th scope="col"><fmt:message key="th.audioTitle"/></th>
                             <th scope="col"><fmt:message key="th.price"/></th>
                             <th scope="col"><fmt:message key="th.date"/></th>
-                            <th></th>
+                            <th scope="col"><fmt:message key="th.listen"/></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -74,7 +84,7 @@
                                 <td>${order.price}</td>
                                 <td>${order.dateTime}</td>
                                 <td>
-                                    <audio controls src="2Pac ft. Sade - Jezebel .mp3"></audio>
+                                    <audio controls src="audios/2Pac ft. Sade - Jezebel .mp3"></audio>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -83,7 +93,9 @@
                 </div>
             </c:when>
             <c:otherwise>
-                <p><fmt:message key="p.noOrders"/></p>
+                <div>
+                    <p><fmt:message key="p.noOrders"/></p>
+                </div>
             </c:otherwise>
         </c:choose>
     </div>

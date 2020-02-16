@@ -10,6 +10,16 @@
 </head>
 <body>
 <header>
+    <div class="locale">
+        <form action="Controller" method="get">
+            <input type="hidden" name="locale" value="en_US">
+            <button type="submit" name="command" value="changeLocale">EN</button>
+        </form>
+        <form action="Controller" method="get">
+            <input type="hidden" name="locale" value="ru_RU">
+            <button type="submit" name="command" value="changeLocale">RU</button>
+        </form>
+    </div>
     <h1>Spotify</h1>
 </header>
 
@@ -48,7 +58,9 @@
     </div>
 
     <div class="container">
-        <p><fmt:message key="p.hello"/> ${sessionScope.user.login}</p>
+        <div>
+            <p><fmt:message key="p.hello"/> ${sessionScope.user.login}</p>
+        </div>
     </div>
 </div>
 </body>

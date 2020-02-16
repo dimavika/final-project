@@ -13,11 +13,21 @@
 <html>
 <head>
     <title><fmt:message key="title.addAudio"/></title>
-    <link rel="stylesheet" href="stylescss/main1.css">
+    <link rel="stylesheet" href="WEB-INF/stylescss/main1.css">
 </head>
 <body>
 
 <header>
+    <div class="locale">
+        <form action="Controller" method="get">
+            <input type="hidden" name="locale" value="en_US">
+            <button type="submit" name="command" value="changeLocale">EN</button>
+        </form>
+        <form action="Controller" method="get">
+            <input type="hidden" name="locale" value="ru_RU">
+            <button type="submit" name="command" value="changeLocale">RU</button>
+        </form>
+    </div>
     <h1>Spotify</h1>
 </header>
 
@@ -60,13 +70,12 @@
         <jsp:useBean id="artists" scope="request" type="java.util.List"/>
         <form action="Controller" method="post">
             <p>
-                <label>
-                    <select name="artist">
+                <label for="artist"><fmt:message key="label.artist"/></label>
+                    <select name="artist" id="artist">
                         <c:forEach var="artist" items="${artists}">
                             <option value="${artist.id}">${artist.name}</option>
                         </c:forEach>
                     </select>
-                </label>
             </p>
             <p>
                 <label for="title"><fmt:message key="label.title"/></label>
@@ -74,19 +83,18 @@
             </p>
             <p>
                 <label for="price"><fmt:message key="label.price"/></label>
-                <input type="number" name="price" id="price"
-                       pattern="[0-9]+([\.,][0-9]+)?" step="0.01"
+                <input type="text" name="price" id="price"
+                       pattern="[0-9]+([\.][0-9]+)?" placeholder="10.99"
                        title="This should be a number with up to 2 decimal places." required>
             </p>
             <p>
-                <label>
-                    <select name="genre">
+                <label for="genre"><fmt:message key="label.genre"/></label>
+                    <select name="genre" id="genre">
                         <option value="rap"><fmt:message key="option.rap"/></option>
                         <option value="rock"><fmt:message key="option.rock"/></option>
                         <option value="country"><fmt:message key="option.country"/></option>
                         <option value="classic"><fmt:message key="option.classic"/></option>
                     </select>
-                </label>
             </p>
             <p>
                 <button type="submit" value="addAudio" name="command"><fmt:message key="button.addAudio"/></button>

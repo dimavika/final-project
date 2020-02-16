@@ -18,6 +18,16 @@
 <body>
 
 <header>
+    <div class="locale">
+        <form action="Controller" method="get">
+            <input type="hidden" name="locale" value="en_US">
+            <button type="submit" name="command" value="changeLocale">EN</button>
+        </form>
+        <form action="Controller" method="get">
+            <input type="hidden" name="locale" value="ru_RU">
+            <button type="submit" name="command" value="changeLocale">RU</button>
+        </form>
+    </div>
     <h1>Spotify</h1>
 </header>
 
@@ -63,14 +73,27 @@
                 </label>
             </p>
             <p>
+
                 <label>
                     <input name="price" value="${requestScope.price}" type="hidden">
                 </label>
             </p>
+
             <p>
                 <label for="cardNum"><fmt:message key="label.cardNum"/></label>
-                    <input name="cardNum" value="" type="text" id="cardNum" required>
+                    <input name="cardNum" value="" type="text" pattern="[0-9]{16}" title="16 nums" id="cardNum" required>
             </p>
+
+            <p>
+                <label for="year"><fmt:message key="label.year"/></label>
+                <input name="year" value="" type="text" pattern="[0-9]{4}" title="4 nums" id="year" required>
+            </p>
+
+            <p>
+                <label for="thirdNum"><fmt:message key="label.thirdNum"/></label>
+                <input name="thirdNum" value="" type="text" pattern="[0-9]{3}" title="3 nums" id="thirdNum" required>
+            </p>
+
             <p>
                 <button type="submit" value="addOrder" name="command"><fmt:message key="button.pay"/></button>
             </p>

@@ -1,0 +1,160 @@
+.authorize {
+    font-family: 'Ubuntu', 'Lato', sans-serif;
+    font-weight: 400;
+    /* Size and position */
+    width: 300px;
+    position: relative;
+    height: 20%;
+    margin: 20% auto 20% auto;
+    padding: 10px;
+    overflow: hidden;
+
+    /* Styles */
+    background: rgb(252, 148, 172);
+    border-radius: 0.4em;
+
+    box-shadow:
+            inset 0 0 2px 1px rgba(255,255,255,0.08),
+            0 16px 10px -8px rgba(0, 0, 0, 0.6);
+}
+
+.authorize-form label {
+    /* Size and position */
+    width: 50%;
+    float: left;
+    padding-top: 9px;
+
+    /* Styles */
+    color: #ddd;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 0 #000;
+    text-indent: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.authorize-form input[type=text],
+.authorize-form input[type=password] {
+    /* Size and position */
+    width: 50%;
+    float: left;
+    padding: 8px 5px;
+    margin-bottom: 10px;
+    font-size: 12px;
+
+    /* Styles */
+    background: white;
+    border: white;
+    box-shadow:
+            0 1px 0 rgba(255,255,255,0.1);
+    border-radius: 3px;
+
+    /* Font styles */
+    font-family: 'Ubuntu', 'Lato', sans-serif;
+    color: black;
+
+}
+
+.authorize-form input[type=text]:hover,
+.authorize-form input[type=password]:hover,
+.authorize-form label:hover ~ input[type=text],
+.authorize-form label:hover ~ input[type=password] {
+    background: white;
+}
+
+.authorize-form input[type=text]:focus,
+.authorize-form input[type=password]:focus {
+    box-shadow: inset 0 0 2px #000;
+    background: white;
+    border-color: #51cbee;
+    outline: none; /* Remove Chrome outline */
+}
+
+.authorize-form p:nth-child(3),
+.authorize-form p:nth-child(4) {
+    float: left;
+    width: 50%;
+}
+
+.authorize-form label[for=remember] {
+    width: auto;
+    float: none;
+    display: inline-block;
+    text-transform: capitalize;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    text-indent: 2px;
+}
+
+.authorize-form input[type=checkbox] {
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.authorize-form button[type=submit] {
+    /* Width and position */
+    width: 100%;
+    padding: 8px 5px;
+
+    /* Styles */
+    border: rgb(135,206,250); /* Fallback */
+    box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.3),
+            inset 0 10px 10px rgba(255,255,255,0.1);
+    border-radius: 3px;
+    background: rgb(135,206,250);
+    cursor:pointer;
+
+    /* Font styles */
+    font-family: 'Ubuntu', 'Lato', sans-serif;
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.8);
+}
+
+.authorize-form button[type=submit]:hover {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.authorize-form button[type=submit]:active {
+    background: #287db5;
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.6);
+    border-color: #000; /* Fallback */
+    border-color: rgba(0,0,0,0.9);
+}
+
+.no-boxshadow .authorize-form button[type=submit]:hover {
+    background: #2a92d8;
+}
+
+.authorize-form p:nth-child(1):before{
+    /* Size and position */
+    content: "";
+    width: 250px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 45px;
+
+    /* Styles */
+    transform: rotate(75deg);
+    background: linear-gradient(50deg, rgba(255,255,255,0.15), rgba(0,0,0,0));
+    pointer-events: none;
+}
+
+.no-pointerevents .authorize-form p:nth-child(1):before {
+    display: none;
+}
+
+.error-message{
+    margin-top: 5px;
+    margin-left: 35px;
+}
+
+.change-title {
+    display: block;
+}

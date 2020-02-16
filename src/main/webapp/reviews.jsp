@@ -18,6 +18,16 @@
 <body>
 
 <header>
+    <div class="locale">
+        <form action="Controller" method="get">
+            <input type="hidden" name="locale" value="en_US">
+            <button type="submit" name="command" value="changeLocale">EN</button>
+        </form>
+        <form action="Controller" method="get">
+            <input type="hidden" name="locale" value="ru_RU">
+            <button type="submit" name="command" value="changeLocale">RU</button>
+        </form>
+    </div>
     <h1>Spotify</h1>
 </header>
 <div class="main">
@@ -55,17 +65,25 @@
     </div>
 
     <div class="container">
-        <c:choose>
-            <c:when test="${not empty requestScope.reviews}">
-                <c:forEach var="review" items="${requestScope.reviews}">
-                    <p>${review.user} ${review.dateTime}</p>
-                    <p>${review.text}</p>
-                </c:forEach>
-            </c:when>
-            <c:otherwise>
-                <p><fmt:message key="p.noReviews"/></p>
-            </c:otherwise>
-        </c:choose>
+
+        <div class="reviews">
+            <c:choose>
+                <c:when test="${not empty requestScope.reviews}">
+                    <c:forEach var="review" items="${requestScope.reviews}">
+                        <div class="review">
+                            <p>${review.user}, ${review.dateTime}<br>
+                                    ${review.text}
+                            </p>
+                        </div>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <div class="no-review">
+                        <p><fmt:message key="p.noReviews"/></p>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+        </div>
 
     </div>
 </div>
